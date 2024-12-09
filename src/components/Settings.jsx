@@ -124,6 +124,7 @@ function Settings() {
                     <label>Scontri ritorno</label>
                 </div>
                 <div className='flex flex-row gap-1'>
+                    <p>Salvataggio automatico ogni </p>
                     <input 
                         id='saveTimer'
                         type="number" 
