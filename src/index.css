@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+:root {
+    --color-primary: #CFE1B9;
+    --color-secondary: #718355;
+    --color-tertiary: #87986A;
+    --sb-size: 5px;
+}
+  
+::-webkit-scrollbar {
+    width: var(--sb-size)
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-primary);
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-secondary);
+    border-radius: 50px;
+}
+
+*{
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
