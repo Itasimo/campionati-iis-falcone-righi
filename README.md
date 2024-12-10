@@ -14,6 +14,7 @@ a6 --Read--> a5
 a6 --> A{AddPlayersUpdate}
 a6 --> B[(SessionStorage Players)]
 A --> b1>Elenco Giocatori]
+B --> b1
 b1 --> b3[Modifica nome]
 b1 --> b4[Elimina giocatore]
 b1 --> b5[Elimina Tutti]
