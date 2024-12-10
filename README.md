@@ -19,6 +19,7 @@ b1 --> b4[Elimina giocatore]
 b1 --> b5[Elimina Tutti]
 A --> c1((Players))
 B --Read--> c1
+c1 --Read--> b1
 c1 --Read--> c2(Trova elemento tramite l'ID)
 c2 --> c3(Esegui modifiche)
 c3 --> C{EditPlayersUpdate}
