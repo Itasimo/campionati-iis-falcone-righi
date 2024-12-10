@@ -14,18 +14,18 @@ a6 --Read--> a5
 a6 --> A{AddPlayersUpdate}
 a6 --> B[(SessionStorage Players)]
 A --> b1>Elenco Giocatori]
-B --Read--> b1
 b1 --> b3[Modifica nome]
 b1 --> b4[Elimina giocatore]
 b1 --> b5[Elimina Tutti]
 A --> c1((Players))
-b3 --> c1
-b4 --> c1
-b5 --> c1
 B --Read--> c1
-c1 --> c2(Trova elemento tramite l'ID)
+c1 --Read--> c2(Trova elemento tramite l'ID)
 c2 --> c3(Esegui modifiche)
 c3 --> C{EditPlayersUpdate}
+b3 --> c2
+b4 --> c2
+b5 --> c2
+c3 --> c1
 C --> a6
 c3 --> B
 B --Read--> d1(Calcola Scontri)
