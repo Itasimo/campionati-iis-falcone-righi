@@ -59,3 +59,19 @@ D --> g1
 E --Read--> g2>Classifica]
 D --> g2
 ```
+### Salvataggio
+```mermaid
+graph LR
+s1[[Timer]] --> s2(SaveData)
+sn[SaveNow] --> s2
+s2 --Read--> s3[(SessionStorage)]
+s2 --Read--> s4[(LocalStorage)]
+s2 --> s5(Hash)
+s3 --> s5
+s4 --> s6[\oldHash\]
+s5 --> s7{==}
+s6 --> s7
+s7 --> s8{{Data}}
+s3 --Read--> s8
+s8 --> s9[(Firebase)]
+```
