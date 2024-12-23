@@ -114,15 +114,6 @@ function Settings() {
         <div className="border-2 border-secondary rounded-lg p-5 h-1/2">
             <h1 className="font-bold mb-2">Impostazioni</h1>
             <div className="ml-5 flex flex-col gap-2">
-                <div className="flex items-center gap-2">
-                    <input 
-                        type="checkbox" 
-                        onClick={handleChangeReturnMatches} 
-                        className="form-checkbox h-5 w-5 text-primary" 
-                        checked={settings.returnMatches} 
-                    />
-                    <label>Scontri ritorno</label>
-                </div>
                 <div className='flex flex-row gap-1'>
                     <p>Salvataggio automatico ogni </p>
                     <input 
