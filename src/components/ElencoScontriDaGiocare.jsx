@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AggiungiRisultato from '../scripts/AggiungiRisultato.js';
+import { OpenPopUp } from '../utils/popup.jsx';
+import EliminaScontro from './popup/EliminaScontro.jsx';
 
 function ElencoScontriDaGiocare() {
 
@@ -31,13 +33,16 @@ function ElencoScontriDaGiocare() {
 
     // Gestisce il click sul pulsante di eliminazione dello scontro
     const handleDeleteScontro = (scontroId) => (e) => {
-
-        // Rimovi lo scontro
-        const scontri = JSON.parse(sessionStorage.getItem('scontri'));
-        const newScontri = scontri.filter(scontro => scontro.id !== scontroId);
-        sessionStorage.setItem('scontri', JSON.stringify(newScontri));
-        setScontri(newScontri);
-        window.dispatchEvent(new Event('StorageScontriUpdate'));
+        OpenPopUp(<EliminaScontro />, 300, null, [['Ok', true], ['Annulla', false]]).then((result) => {
+            if (result) {
+                // Rimovi lo scontro
+                const scontri = JSON.parse(sessionStorage.getItem('scontri'));
+                const newScontri = scontri.filter(scontro => scontro.id !== scontroId);
+                sessionStorage.setItem('scontri', JSON.stringify(newScontri));
+                setScontri(newScontri);
+                window.dispatchEvent(new Event('StorageScontriUpdate'));
+            }
+        });
     }
 
     // Ritorna il JSX per il rendering del componente
