@@ -37,6 +37,7 @@ function ElencoScontriDaGiocare() {
         const newScontri = scontri.filter(scontro => scontro.id !== scontroId);
         sessionStorage.setItem('scontri', JSON.stringify(newScontri));
         setScontri(newScontri);
+        window.dispatchEvent(new Event('StorageScontriUpdate'));
     }
 
     // Ritorna il JSX per il rendering del componente
