@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CalcolaScontri from "./CalcolaScontri";
+import { stringify } from "postcss";
 
 function ScontriManager() {
 
@@ -18,11 +19,26 @@ function ScontriManager() {
                 const scontriCalcolati = CalcolaScontri(players);
 
                 // Aggiorna gli scontri esistenti mantenendo il parametro winner
-                const scontriAggiornati = scontriCalcolati.map(scontroCalcolato => {
-                    const scontroEsistente = CurrentScontri.find(s => s.id == scontroCalcolato.id);          
+                let scontriAggiornati = scontriCalcolati.map(scontroCalcolato => {
+                    // Cerca lo scontro corrente nella lista degli scontri esistenti
+                    const scontroEsistente = CurrentScontri.find(s => s.id == scontroCalcolato.id); 
+                    // Se lo scontro esiste, mantiene il vincitore altrimenti lo imposta a null        
                     return scontroEsistente ? { ...scontroCalcolato, winner: scontroEsistente.winner || null } : scontroCalcolato;
                 });
 
+                // Rimuovi gli scontri eliminati dall'utente
+
+                // Ottieni gli ID dei giocatori correnti dalla lista degli scontri attuali
+                const OldPlayersIDs = [...new Set(CurrentScontri.map(s => s.player1.id.toString()).concat(CurrentScontri.map(s => s.player2.id.toString())))];
+                // Crea una lista contenente solo gli scontri con i giocatori vecchi (Vecchi in caso vengano aggiunti nuovi giocatori)
+                const OldScontri = scontriAggiornati.filter(s => OldPlayersIDs.includes(s.player1.id.toString()) && OldPlayersIDs.includes(s.player2.id.toString()));
+                // Crea una lista con gli elementi di CurrentScontri convertiti in stringa (JS non confronta oggetti... quindi li converto in stringa... che merda)
+                const CurrentScontriString = CurrentScontri.map(s => JSON.stringify(s));
+                // Trova la differenza tra OldScontri e CurrentScontriString, ovvero gli scontri eliminati dall'utente
+                const diff = OldScontri.filter(x => !CurrentScontriString.includes(JSON.stringify(x)));
+                // Rimuovi gli elementi di diff dalla lista scontriAggiornati
+                scontriAggiornati = scontriAggiornati.filter(s => !diff.includes(s));
+                
                 // Aggiorna la lista degli scontri nella sessionStorage e lancia l'evento di aggiornamento
                 sessionStorage.setItem('scontri', JSON.stringify(scontriAggiornati));
                 window.dispatchEvent(new Event('StorageScontriUpdate'));
