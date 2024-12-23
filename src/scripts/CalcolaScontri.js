@@ -1,7 +1,4 @@
 function CalcolaScontri(players) {
-
-    // const classe = sessionStorage.getItem('classe');
-    // const settings = JSON.parse(localStorage.getItem(classe)).settings;
     
     class Scontro {
         constructor(player1, player2) {

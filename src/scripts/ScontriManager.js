@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import CalcolaScontri from "./CalcolaScontri";
-import { stringify } from "postcss";
 
 function ScontriManager() {
 
@@ -38,7 +37,7 @@ function ScontriManager() {
                 const diff = OldScontri.filter(x => !CurrentScontriString.includes(JSON.stringify(x)));
                 // Rimuovi gli elementi di diff dalla lista scontriAggiornati
                 scontriAggiornati = scontriAggiornati.filter(s => !diff.includes(s));
-                
+
                 // Aggiorna la lista degli scontri nella sessionStorage e lancia l'evento di aggiornamento
                 sessionStorage.setItem('scontri', JSON.stringify(scontriAggiornati));
                 window.dispatchEvent(new Event('StorageScontriUpdate'));
